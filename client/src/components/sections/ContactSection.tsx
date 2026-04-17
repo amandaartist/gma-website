@@ -1,0 +1,258 @@
+/*
+ * ContactSection — GMA Editorial Luxury
+ * Split layout: contact info left, form right
+ * Warm white background, clean form styling
+ */
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { MapPin, Mail, Phone, Send, CheckCircle } from "lucide-react";
+
+const cooperationTypes = [
+  "产品分销合作",
+  "渠道资源对接",
+  "品牌市场拓展",
+  "高端活动合作",
+  "其他商务合作",
+];
+
+export default function ContactSection() {
+  const { ref, isVisible } = useScrollAnimation(0.05);
+  const [submitted, setSubmitted] = useState(false);
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    type: "",
+    message: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate form submission
+    setSubmitted(true);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  return (
+    <section id="contact" className="py-24 md:py-36 bg-[#FAFAF8]" ref={ref}>
+      <div className="container">
+        {/* Header */}
+        <motion.div
+          className="mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="divider-line" />
+            <span className="font-body text-xs tracking-[0.2em] uppercase text-navy">
+              Contact Us
+            </span>
+          </div>
+          <h2
+            className="font-display font-light leading-tight"
+            style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "#1A1A1A", letterSpacing: "-0.02em" }}
+          >
+            联系我们
+          </h2>
+        </motion.div>
+
+        <div className="grid md:grid-cols-5 gap-16 lg:gap-24">
+          {/* Contact Info — 2 cols */}
+          <motion.div
+            className="md:col-span-2"
+            initial={{ opacity: 0, x: -30 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+          >
+            <p
+              className="font-body leading-relaxed mb-10"
+              style={{ fontSize: "1rem", color: "#3A3A3A", lineHeight: "1.85" }}
+            >
+              欢迎联系我们，了解更多合作机会与市场拓展方案。
+            </p>
+
+            <div className="space-y-6">
+              {[
+                {
+                  icon: MapPin,
+                  label: "地址",
+                  value: "美国纽约",
+                  sub: "United States, New York",
+                },
+                {
+                  icon: Mail,
+                  label: "邮箱",
+                  value: "info@yourcompany.com",
+                  sub: "Business Inquiries",
+                },
+                {
+                  icon: Phone,
+                  label: "电话",
+                  value: "+1 XXX XXX XXXX",
+                  sub: "Mon–Fri, 9AM–6PM EST",
+                },
+              ].map((item) => {
+                const Icon = item.icon;
+                return (
+                  <div key={item.label} className="flex gap-4">
+                    <div
+                      className="w-9 h-9 flex items-center justify-center flex-shrink-0 mt-0.5"
+                      style={{ border: "1px solid oklch(0.26 0.06 240 / 0.2)" }}
+                    >
+                      <Icon size={14} color="oklch(0.26 0.06 240)" />
+                    </div>
+                    <div>
+                      <div className="font-body text-xs tracking-widest uppercase text-bronze mb-0.5">
+                        {item.label}
+                      </div>
+                      <div className="font-body text-sm font-medium text-[#1A1A1A]">
+                        {item.value}
+                      </div>
+                      <div className="font-body text-xs text-gray-400 mt-0.5">{item.sub}</div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Decorative divider */}
+            <div className="mt-12 pt-10 border-t border-gray-100">
+              <p className="font-body text-xs tracking-widest uppercase text-gray-400 mb-3">
+                Global Management Alliance INC
+              </p>
+              <p className="font-body text-xs text-gray-400 leading-relaxed">
+                Connecting global products, resources,
+                <br />
+                and market opportunities.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Form — 3 cols */}
+          <motion.div
+            className="md:col-span-3"
+            initial={{ opacity: 0, x: 30 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
+            {submitted ? (
+              <motion.div
+                className="flex flex-col items-center justify-center py-20 text-center"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <CheckCircle size={48} color="oklch(0.26 0.06 240)" className="mb-6" />
+                <h3 className="font-display text-2xl text-[#1A1A1A] mb-3">
+                  感谢您的联系
+                </h3>
+                <p className="font-body text-gray-500 text-sm leading-relaxed max-w-sm">
+                  我们已收到您的信息，将在 1–2 个工作日内与您联系。
+                </p>
+                <button
+                  onClick={() => setSubmitted(false)}
+                  className="btn-outline-dark mt-8 text-xs"
+                >
+                  重新提交
+                </button>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
+                      姓名 <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
+                      placeholder="您的姓名"
+                      required
+                      className="input-field"
+                    />
+                  </div>
+                  <div>
+                    <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
+                      公司 <span className="text-red-400">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="company"
+                      value={form.company}
+                      onChange={handleChange}
+                      placeholder="公司名称"
+                      required
+                      className="input-field"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
+                    合作类型
+                  </label>
+                  <select
+                    name="type"
+                    value={form.type}
+                    onChange={handleChange}
+                    className="input-field appearance-none"
+                    style={{
+                      backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                      backgroundRepeat: "no-repeat",
+                      backgroundPosition: "right 1rem center",
+                    }}
+                  >
+                    <option value="">请选择合作类型</option>
+                    {cooperationTypes.map((t) => (
+                      <option key={t} value={t}>
+                        {t}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
+                    需求说明 <span className="text-red-400">*</span>
+                  </label>
+                  <textarea
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="请描述您的合作需求或问题..."
+                    required
+                    rows={5}
+                    className="input-field resize-none"
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center"
+                    style={{ fontSize: "0.8125rem" }}
+                  >
+                    提交
+                    <Send size={13} />
+                  </button>
+                  <p className="font-body text-xs text-gray-400 mt-3">
+                    提交即表示您同意我们与您就合作事宜进行联系。
+                  </p>
+                </div>
+              </form>
+            )}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
