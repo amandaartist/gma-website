@@ -2,7 +2,7 @@
  * GMA Website — Editorial Luxury Design System
  * Design Movement: Contemporary Luxury Editorial (McKinsey / Goldman Sachs aesthetic)
  * Core: Warm white canvas, deep charcoal text, navy accent, bronze secondary
- * Typography: Cormorant Garamond (display) + Outfit (body/UI)
+ * Typography: Bold Microsoft YaHei (display) + Outfit (body/UI)
  * Palette: #FAFAF8 bg | #1A1A1A text | #1B3A5C navy | #8B7355 bronze
  */
 
@@ -35,7 +35,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Microsoft YaHei', '微软雅黑', 'Cormorant Garamond', Georgia, serif;
   --font-body: 'Outfit', system-ui, sans-serif;
 }
 
@@ -82,7 +82,8 @@
     -moz-osx-font-smoothing: grayscale;
   }
   h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Microsoft YaHei', '微软雅黑', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
   }
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
@@ -125,7 +126,8 @@
 
   /* GMA Custom Components */
   .font-display {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Microsoft YaHei', '微软雅黑', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
   }
 
   .font-body {
@@ -133,9 +135,9 @@
   }
 
   .section-number {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Microsoft YaHei', '微软雅黑', 'Cormorant Garamond', Georgia, serif;
     font-size: 5rem;
-    font-weight: 300;
+    font-weight: 700;
     color: oklch(0.88 0.005 90);
     line-height: 1;
     letter-spacing: -0.02em;
@@ -314,6 +316,34 @@
 
   .bg-dark {
     background-color: oklch(0.1 0.005 30);
+  }
+
+  .lang-toggle {
+    display: inline-flex;
+    gap: 0.5rem;
+    padding: 0.25rem;
+    background: oklch(0.88 0.005 90);
+    border-radius: 0.25rem;
+  }
+
+  .lang-toggle button {
+    padding: 0.375rem 0.75rem;
+    font-family: 'Outfit', system-ui, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    color: oklch(0.6 0.005 30);
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+  .lang-toggle button.active {
+    background: white;
+    color: oklch(0.26 0.06 240);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 }
 

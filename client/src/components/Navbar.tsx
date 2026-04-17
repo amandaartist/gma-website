@@ -2,23 +2,27 @@
  * Navbar — GMA Editorial Luxury Design
  * Fixed top nav, transparent → white on scroll
  * Logo: GMA wordmark | Links: uppercase small caps
+ * Language toggle integrated
  */
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { label: "公司介绍", href: "#about" },
-  { label: "核心业务", href: "#solutions" },
-  { label: "商业模式", href: "#model" },
-  { label: "我们的优势", href: "#advantages" },
-  { label: "联系我们", href: "#contact" },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 
 export default function Navbar() {
+  const { t } = useLanguage();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const navLinks = [
+    { label: t("nav.about"), href: "#about" },
+    { label: t("nav.solutions"), href: "#solutions" },
+    { label: t("nav.model"), href: "#model" },
+    { label: t("nav.advantages"), href: "#advantages" },
+    { label: t("nav.contact"), href: "#contact" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60);
@@ -57,7 +61,7 @@ export default function Navbar() {
               className="flex flex-col leading-none"
             >
               <span
-                className="font-display text-xl md:text-2xl font-semibold tracking-tight"
+                className="font-display text-xl md:text-2xl font-bold tracking-tight"
                 style={{ color: scrolled ? "oklch(0.13 0.005 30)" : "white" }}
               >
                 GMA
@@ -83,6 +87,9 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <div style={{ opacity: scrolled ? 1 : 0.7, transition: "opacity 0.3s" }}>
+                <LanguageToggle />
+              </div>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
@@ -97,7 +104,7 @@ export default function Navbar() {
                     : {}
                 }
               >
-                发起合作
+                {t("nav.initiate")}
               </a>
             </nav>
 
@@ -133,7 +140,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                  className="font-display text-3xl font-light py-3 border-b border-gray-100 text-[#1A1A1A]"
+                  className="font-display text-3xl font-bold py-3 border-b border-gray-100 text-[#1A1A1A]"
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.06, duration: 0.3 }}
@@ -143,12 +150,18 @@ export default function Navbar() {
               ))}
             </nav>
             <div className="mt-auto">
+              <div className="mb-6">
+                <p className="font-body text-xs tracking-widest uppercase text-gray-400 mb-3">
+                  Language
+                </p>
+                <LanguageToggle />
+              </div>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); handleNavClick("#contact"); }}
                 className="btn-primary w-full justify-center mt-8"
               >
-                发起合作
+                {t("nav.initiate")}
               </a>
               <p className="font-body text-xs text-gray-400 mt-6 tracking-wider uppercase">
                 Global Management Alliance INC · New York

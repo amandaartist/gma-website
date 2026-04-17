@@ -6,10 +6,13 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663569048054/aQXQWqSUGgXzNzWvnZDJEo/gma-hero-bg-T4yJDCJD2emBdJZAH6TepV.webp";
 
 export default function HeroSection() {
+  const { t } = useLanguage();
+
   const scrollToSection = (id: string) => {
     const el = document.querySelector(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -64,13 +67,13 @@ export default function HeroSection() {
               className="font-body text-xs tracking-[0.2em] uppercase"
               style={{ color: "rgba(200,169,110,0.9)" }}
             >
-              Global Management Alliance INC · New York
+              {t("hero.eyebrow")}
             </span>
           </motion.div>
 
           {/* Main Headline */}
           <motion.h1
-            className="font-display font-light leading-tight mb-6"
+            className="font-display font-bold leading-tight mb-6"
             style={{
               fontSize: "clamp(2.8rem, 7vw, 6rem)",
               color: "white",
@@ -80,11 +83,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
-            连接全球产品、
-            <br />
-            <em style={{ color: "rgba(200,169,110,0.95)", fontStyle: "italic" }}>
-              资源与市场机会
-            </em>
+            {t("hero.title")}
           </motion.h1>
 
           {/* Subtitle */}
@@ -99,8 +98,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
           >
-            我们通过跨境分销能力、资源整合与高端网络，
-            助力品牌与合作伙伴拓展国际市场。
+            {t("hero.subtitle")}
           </motion.p>
 
           {/* CTAs */}
@@ -115,7 +113,7 @@ export default function HeroSection() {
               className="btn-primary flex items-center gap-2"
               style={{ fontSize: "0.8125rem" }}
             >
-              查看解决方案
+              {t("hero.cta1")}
               <ArrowRight size={14} />
             </button>
             <button
@@ -123,7 +121,7 @@ export default function HeroSection() {
               className="btn-outline flex items-center gap-2"
               style={{ fontSize: "0.8125rem" }}
             >
-              联系我们
+              {t("hero.cta2")}
             </button>
           </motion.div>
         </div>
@@ -139,13 +137,13 @@ export default function HeroSection() {
         <div className="container">
           <div className="grid grid-cols-3 divide-x divide-white/10 py-8">
             {[
-              { num: "纽约", label: "总部所在地" },
-              { num: "全球", label: "市场覆盖" },
-              { num: "跨境", label: "分销能力" },
+              { num: t("hero.stat1"), label: t("hero.stat1_label") },
+              { num: t("hero.stat2"), label: t("hero.stat2_label") },
+              { num: t("hero.stat3"), label: t("hero.stat3_label") },
             ].map((item) => (
               <div key={item.label} className="px-6 first:pl-0 last:pr-0 text-center md:text-left">
                 <div
-                  className="font-display font-medium mb-1"
+                  className="font-display font-bold mb-1"
                   style={{ fontSize: "1.5rem", color: "rgba(200,169,110,0.9)" }}
                 >
                   {item.num}

@@ -7,18 +7,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { MapPin, Mail, Phone, Send, CheckCircle } from "lucide-react";
-
-const cooperationTypes = [
-  "产品分销合作",
-  "渠道资源对接",
-  "品牌市场拓展",
-  "高端活动合作",
-  "其他商务合作",
-];
 
 export default function ContactSection() {
   const { ref, isVisible } = useScrollAnimation(0.05);
+  const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({
     name: "",
@@ -26,6 +20,14 @@ export default function ContactSection() {
     type: "",
     message: "",
   });
+
+  const cooperationTypes = [
+    t("contact.type_distribution"),
+    t("contact.type_channel"),
+    t("contact.type_expansion"),
+    t("contact.type_events"),
+    t("contact.type_other"),
+  ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,14 +54,14 @@ export default function ContactSection() {
           <div className="flex items-center gap-3 mb-6">
             <span className="divider-line" />
             <span className="font-body text-xs tracking-[0.2em] uppercase text-navy">
-              Contact Us
+              {t("contact.eyebrow")}
             </span>
           </div>
           <h2
-            className="font-display font-light leading-tight"
+            className="font-display font-bold leading-tight"
             style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "#1A1A1A", letterSpacing: "-0.02em" }}
           >
-            联系我们
+            {t("contact.title")}
           </h2>
         </motion.div>
 
@@ -75,28 +77,28 @@ export default function ContactSection() {
               className="font-body leading-relaxed mb-10"
               style={{ fontSize: "1rem", color: "#3A3A3A", lineHeight: "1.85" }}
             >
-              欢迎联系我们，了解更多合作机会与市场拓展方案。
+              {t("contact.intro")}
             </p>
 
             <div className="space-y-6">
               {[
                 {
                   icon: MapPin,
-                  label: "地址",
-                  value: "美国纽约",
-                  sub: "United States, New York",
+                  label: t("contact.address_label"),
+                  value: t("contact.address_value"),
+                  sub: t("contact.address_sub"),
                 },
                 {
                   icon: Mail,
-                  label: "邮箱",
-                  value: "info@yourcompany.com",
-                  sub: "Business Inquiries",
+                  label: t("contact.email_label"),
+                  value: t("contact.email_value"),
+                  sub: t("contact.email_sub"),
                 },
                 {
                   icon: Phone,
-                  label: "电话",
-                  value: "+1 XXX XXX XXXX",
-                  sub: "Mon–Fri, 9AM–6PM EST",
+                  label: t("contact.phone_label"),
+                  value: t("contact.phone_value"),
+                  sub: t("contact.phone_sub"),
                 },
               ].map((item) => {
                 const Icon = item.icon;
@@ -125,12 +127,10 @@ export default function ContactSection() {
             {/* Decorative divider */}
             <div className="mt-12 pt-10 border-t border-gray-100">
               <p className="font-body text-xs tracking-widest uppercase text-gray-400 mb-3">
-                Global Management Alliance INC
+                {t("contact.footer_text")}
               </p>
               <p className="font-body text-xs text-gray-400 leading-relaxed">
-                Connecting global products, resources,
-                <br />
-                and market opportunities.
+                {t("contact.footer_sub")}
               </p>
             </div>
           </motion.div>
@@ -150,17 +150,17 @@ export default function ContactSection() {
                 transition={{ duration: 0.5 }}
               >
                 <CheckCircle size={48} color="oklch(0.26 0.06 240)" className="mb-6" />
-                <h3 className="font-display text-2xl text-[#1A1A1A] mb-3">
-                  感谢您的联系
+                <h3 className="font-display font-bold text-2xl text-[#1A1A1A] mb-3">
+                  {t("contact.form_success_title")}
                 </h3>
                 <p className="font-body text-gray-500 text-sm leading-relaxed max-w-sm">
-                  我们已收到您的信息，将在 1–2 个工作日内与您联系。
+                  {t("contact.form_success_desc")}
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
                   className="btn-outline-dark mt-8 text-xs"
                 >
-                  重新提交
+                  {t("contact.form_reset")}
                 </button>
               </motion.div>
             ) : (
@@ -168,28 +168,28 @@ export default function ContactSection() {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div>
                     <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
-                      姓名 <span className="text-red-400">*</span>
+                      {t("contact.form_name")} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
                       name="name"
                       value={form.name}
                       onChange={handleChange}
-                      placeholder="您的姓名"
+                      placeholder={t("contact.form_name_placeholder")}
                       required
                       className="input-field"
                     />
                   </div>
                   <div>
                     <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
-                      公司 <span className="text-red-400">*</span>
+                      {t("contact.form_company")} <span className="text-red-400">*</span>
                     </label>
                     <input
                       type="text"
                       name="company"
                       value={form.company}
                       onChange={handleChange}
-                      placeholder="公司名称"
+                      placeholder={t("contact.form_company_placeholder")}
                       required
                       className="input-field"
                     />
@@ -198,7 +198,7 @@ export default function ContactSection() {
 
                 <div>
                   <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
-                    合作类型
+                    {t("contact.form_type")}
                   </label>
                   <select
                     name="type"
@@ -211,10 +211,10 @@ export default function ContactSection() {
                       backgroundPosition: "right 1rem center",
                     }}
                   >
-                    <option value="">请选择合作类型</option>
-                    {cooperationTypes.map((t) => (
-                      <option key={t} value={t}>
-                        {t}
+                    <option value="">{t("contact.form_type_placeholder")}</option>
+                    {cooperationTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
                       </option>
                     ))}
                   </select>
@@ -222,13 +222,13 @@ export default function ContactSection() {
 
                 <div>
                   <label className="font-body text-xs tracking-widest uppercase text-gray-500 block mb-2">
-                    需求说明 <span className="text-red-400">*</span>
+                    {t("contact.form_message")} <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     name="message"
                     value={form.message}
                     onChange={handleChange}
-                    placeholder="请描述您的合作需求或问题..."
+                    placeholder={t("contact.form_message_placeholder")}
                     required
                     rows={5}
                     className="input-field resize-none"
@@ -241,11 +241,11 @@ export default function ContactSection() {
                     className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center"
                     style={{ fontSize: "0.8125rem" }}
                   >
-                    提交
+                    {t("contact.form_submit")}
                     <Send size={13} />
                   </button>
                   <p className="font-body text-xs text-gray-400 mt-3">
-                    提交即表示您同意我们与您就合作事宜进行联系。
+                    {t("contact.form_privacy")}
                   </p>
                 </div>
               </form>

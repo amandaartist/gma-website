@@ -6,11 +6,13 @@
 
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ABOUT_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663569048054/aQXQWqSUGgXzNzWvnZDJEo/gma-about-img-R8PBoVJqgnS3ELn4QbxEoe.webp";
 
 export default function AboutSection() {
   const { ref, isVisible } = useScrollAnimation(0.1);
+  const { t } = useLanguage();
 
   return (
     <section id="about" className="py-24 md:py-36 bg-[#FAFAF8]" ref={ref}>
@@ -26,15 +28,15 @@ export default function AboutSection() {
             <div className="flex items-center gap-3 mb-8">
               <span className="divider-line" />
               <span className="font-body text-xs tracking-[0.2em] uppercase text-navy">
-                About Us
+                {t("about.eyebrow")}
               </span>
             </div>
 
             <h2
-              className="font-display font-light mb-8 leading-tight"
+              className="font-display font-bold mb-8 leading-tight"
               style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "#1A1A1A", letterSpacing: "-0.02em" }}
             >
-              我们是谁
+              {t("about.title")}
             </h2>
 
             <div className="space-y-6">
@@ -42,23 +44,23 @@ export default function AboutSection() {
                 className="font-body leading-relaxed"
                 style={{ fontSize: "1.05rem", color: "#3A3A3A", lineHeight: "1.85" }}
               >
-                我们是一家总部位于纽约的跨境商业服务公司，专注于产品布局、渠道拓展与战略合作。
+                {t("about.p1")}
               </p>
               <p
                 className="font-body leading-relaxed"
                 style={{ fontSize: "1.05rem", color: "#3A3A3A", lineHeight: "1.85" }}
               >
-                通过整合优质产品与高端资源，我们为客户创造真实可落地的商业机会，帮助品牌与合作伙伴进入国际市场。
+                {t("about.p2")}
               </p>
             </div>
 
             {/* Key facts */}
             <div className="grid grid-cols-2 gap-6 mt-12 pt-10 border-t border-gray-100">
               {[
-                { label: "总部", value: "纽约，美国" },
-                { label: "专注领域", value: "跨境商业服务" },
-                { label: "核心能力", value: "渠道拓展与资源整合" },
-                { label: "服务对象", value: "品牌方 · 供应商 · 合作伙伴" },
+                { label: t("about.fact1_label"), value: t("about.fact1_value") },
+                { label: t("about.fact2_label"), value: t("about.fact2_value") },
+                { label: t("about.fact3_label"), value: t("about.fact3_value") },
+                { label: t("about.fact4_label"), value: t("about.fact4_value") },
               ].map((item) => (
                 <div key={item.label}>
                   <div className="font-body text-xs tracking-widest uppercase text-bronze mb-1">
@@ -99,7 +101,7 @@ export default function AboutSection() {
                 }}
               >
                 <p className="font-body text-xs tracking-[0.15em] uppercase text-white/70">
-                  New York City · Global Headquarters
+                  {t("about.img_caption")}
                 </p>
               </div>
             </div>

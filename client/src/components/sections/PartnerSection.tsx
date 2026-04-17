@@ -6,12 +6,14 @@
 
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight } from "lucide-react";
 
 const PARTNER_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663569048054/aQXQWqSUGgXzNzWvnZDJEo/gma-partner-bg-8GA5p22eMqcn9Km8afnAZE.webp";
 
 export default function PartnerSection() {
   const { ref, isVisible } = useScrollAnimation(0.1);
+  const { t } = useLanguage();
 
   return (
     <section id="partner" className="relative py-32 md:py-48 overflow-hidden" ref={ref}>
@@ -38,18 +40,18 @@ export default function PartnerSection() {
           >
             <span className="divider-line-bronze" />
             <span className="font-body text-xs tracking-[0.2em] uppercase text-bronze">
-              Partnership
+              {t("partner.eyebrow")}
             </span>
           </motion.div>
 
           <motion.h2
-            className="font-display font-light leading-tight mb-8"
+            className="font-display font-bold leading-tight mb-8"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)", color: "white", letterSpacing: "-0.02em" }}
             initial={{ opacity: 0, y: 40 }}
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            合作共赢
+            {t("partner.title")}
           </motion.h2>
 
           <motion.p
@@ -59,7 +61,7 @@ export default function PartnerSection() {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            我们欢迎品牌方、供应商及合作伙伴共同探索国际市场机会。
+            {t("partner.p1")}
           </motion.p>
 
           <motion.p
@@ -69,7 +71,7 @@ export default function PartnerSection() {
             animate={isVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
-            无论是产品分销还是商业合作，我们都可以为您提供支持。
+            {t("partner.p2")}
           </motion.p>
 
           <motion.div
@@ -82,7 +84,7 @@ export default function PartnerSection() {
               className="btn-primary flex items-center gap-2"
               style={{ fontSize: "0.8125rem" }}
             >
-              发起合作
+              {t("partner.cta")}
               <ArrowRight size={14} />
             </button>
           </motion.div>
@@ -98,15 +100,14 @@ export default function PartnerSection() {
           <div className="flex items-center gap-3 mb-6">
             <span className="divider-line-bronze" />
             <span className="font-body text-xs tracking-[0.2em] uppercase text-bronze">
-              About GMA
+              {t("partner.about_eyebrow")}
             </span>
           </div>
           <p
             className="font-body leading-relaxed"
             style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.6)", lineHeight: "1.85" }}
           >
-            我们致力于搭建全球产品、商业资源与市场需求之间的桥梁。
-            通过市场洞察、渠道能力与资源整合，我们帮助合作伙伴实现持续增长与商业价值提升。
+            {t("partner.about_desc")}
           </p>
         </motion.div>
       </div>

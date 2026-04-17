@@ -6,38 +6,40 @@
 
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Globe, Network, Target, Handshake, TrendingUp } from "lucide-react";
-
-const advantages = [
-  {
-    icon: Globe,
-    title: "跨境资源整合能力",
-    description: "深度整合全球优质产品资源与市场渠道，构建高效的跨境商业生态。",
-  },
-  {
-    icon: Network,
-    title: "国际分销渠道连接能力",
-    description: "覆盖线上与线下的多元分销网络，助力产品快速触达目标市场。",
-  },
-  {
-    icon: Target,
-    title: "产品市场定位经验",
-    description: "丰富的国际市场定位经验，精准把握不同市场的需求与机会。",
-  },
-  {
-    icon: Handshake,
-    title: "灵活的商业合作模式",
-    description: "根据合作伙伴需求定制合作方案，实现互利共赢的商业关系。",
-  },
-  {
-    icon: TrendingUp,
-    title: "聚焦高价值商业机会",
-    description: "专注于具有长期价值的商业机会，推动可持续增长与价值创造。",
-  },
-];
 
 export default function AdvantagesSection() {
   const { ref, isVisible } = useScrollAnimation(0.05);
+  const { t } = useLanguage();
+
+  const advantages = [
+    {
+      icon: Globe,
+      title: t("advantages.a1_title"),
+      description: t("advantages.a1_desc"),
+    },
+    {
+      icon: Network,
+      title: t("advantages.a2_title"),
+      description: t("advantages.a2_desc"),
+    },
+    {
+      icon: Target,
+      title: t("advantages.a3_title"),
+      description: t("advantages.a3_desc"),
+    },
+    {
+      icon: Handshake,
+      title: t("advantages.a4_title"),
+      description: t("advantages.a4_desc"),
+    },
+    {
+      icon: TrendingUp,
+      title: t("advantages.a5_title"),
+      description: t("advantages.a5_desc"),
+    },
+  ];
 
   return (
     <section id="advantages" className="py-24 md:py-36" style={{ background: "#0A0F1A" }} ref={ref}>
@@ -52,21 +54,21 @@ export default function AdvantagesSection() {
           <div className="flex items-center gap-3 mb-6">
             <span className="divider-line-bronze" />
             <span className="font-body text-xs tracking-[0.2em] uppercase text-bronze">
-              Our Advantages
+              {t("advantages.eyebrow")}
             </span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2
-              className="font-display font-light leading-tight"
+              className="font-display font-bold leading-tight"
               style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "white", letterSpacing: "-0.02em" }}
             >
-              我们的优势
+              {t("advantages.title")}
             </h2>
             <p
               className="font-body max-w-sm leading-relaxed"
               style={{ color: "rgba(255,255,255,0.45)", fontSize: "0.9rem" }}
             >
-              五大核心竞争优势，驱动国际商业价值
+              {t("advantages.subtitle")}
             </p>
           </div>
         </motion.div>
@@ -104,7 +106,7 @@ export default function AdvantagesSection() {
 
                   {/* Index */}
                   <div
-                    className="font-display font-light mb-3"
+                    className="font-display font-bold mb-3"
                     style={{ fontSize: "0.75rem", color: "rgba(200,169,110,0.5)", letterSpacing: "0.15em" }}
                   >
                     0{i + 1}
@@ -112,7 +114,7 @@ export default function AdvantagesSection() {
 
                   {/* Title */}
                   <h3
-                    className="font-display font-medium mb-4 leading-snug"
+                    className="font-display font-bold mb-4 leading-snug"
                     style={{ fontSize: "1.25rem", color: "white" }}
                   >
                     {item.title}
@@ -140,18 +142,16 @@ export default function AdvantagesSection() {
           >
             <div>
               <p
-                className="font-display font-light leading-snug mb-6"
+                className="font-display font-bold leading-snug mb-6"
                 style={{ fontSize: "1.5rem", color: "white" }}
               >
-                准备好开启
-                <br />
-                <em>国际市场之旅？</em>
+                {t("advantages.cta_title")}
               </p>
               <p
                 className="font-body text-sm leading-relaxed"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
-                联系我们，了解如何通过我们的网络与能力，加速您的全球业务布局。
+                {t("advantages.cta_desc")}
               </p>
             </div>
             <button
@@ -159,7 +159,7 @@ export default function AdvantagesSection() {
               className="btn-outline mt-8 justify-center"
               style={{ fontSize: "0.75rem" }}
             >
-              立即联系
+              {t("advantages.cta_btn")}
             </button>
           </motion.div>
         </div>

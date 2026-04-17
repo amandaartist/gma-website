@@ -6,19 +6,21 @@
 
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Check } from "lucide-react";
 
 const SOLUTIONS_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663569048054/aQXQWqSUGgXzNzWvnZDJEo/gma-solutions-bg-fhwzvZVjyYwFLLbPaxqK4t.webp";
 
-const modelItems = [
-  "跨境产品分销",
-  "线上与线下渠道整合",
-  "批发合作",
-  "国际市场拓展",
-];
-
 export default function ModelSection() {
   const { ref, isVisible } = useScrollAnimation(0.1);
+  const { t } = useLanguage();
+
+  const modelItems = [
+    t("model.item1"),
+    t("model.item2"),
+    t("model.item3"),
+    t("model.item4"),
+  ];
 
   return (
     <section id="model" className="py-24 md:py-36 bg-[#FAFAF8]" ref={ref}>
@@ -34,7 +36,7 @@ export default function ModelSection() {
             <div className="relative overflow-hidden">
               <img
                 src={SOLUTIONS_BG}
-                alt="Global Business Network"
+                alt={t("model.img_alt")}
                 className="w-full object-cover"
                 style={{ height: "500px" }}
               />
@@ -44,10 +46,10 @@ export default function ModelSection() {
                 style={{ background: "oklch(0.26 0.06 240 / 0.92)" }}
               >
                 <p className="font-body text-xs tracking-[0.15em] uppercase text-white/80">
-                  Business Model
+                  {t("model.eyebrow")}
                 </p>
-                <p className="font-display text-xl text-white mt-0.5">
-                  全球分销网络
+                <p className="font-display text-xl font-bold text-white mt-0.5">
+                  {t("model.title")}
                 </p>
               </div>
             </div>
@@ -68,22 +70,22 @@ export default function ModelSection() {
             <div className="flex items-center gap-3 mb-8">
               <span className="divider-line" />
               <span className="font-body text-xs tracking-[0.2em] uppercase text-navy">
-                Business Model
+                {t("model.eyebrow")}
               </span>
             </div>
 
             <h2
-              className="font-display font-light mb-8 leading-tight"
+              className="font-display font-bold mb-8 leading-tight"
               style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "#1A1A1A", letterSpacing: "-0.02em" }}
             >
-              我们的商业模式
+              {t("model.title")}
             </h2>
 
             <p
               className="font-body leading-relaxed mb-10"
               style={{ fontSize: "1.05rem", color: "#3A3A3A", lineHeight: "1.85" }}
             >
-              我们与优质品牌、供应商及渠道合作伙伴共同合作，将具有潜力的产品引入全球市场。
+              {t("model.intro")}
             </p>
 
             {/* Model items */}
@@ -121,8 +123,7 @@ export default function ModelSection() {
                 className="font-body leading-relaxed"
                 style={{ fontSize: "0.9rem", color: "#3A3A3A", lineHeight: "1.8" }}
               >
-                我们的业务涵盖从产品采购、渠道整合到国际市场落地的完整链路，
-                致力于为合作伙伴创造可持续的商业价值。
+                {t("model.highlight")}
               </p>
             </div>
           </motion.div>

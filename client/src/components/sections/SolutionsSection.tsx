@@ -6,37 +6,51 @@
 
 import { motion } from "framer-motion";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowUpRight } from "lucide-react";
-
-const services = [
-  {
-    number: "01",
-    title: "产品与渠道解决方案",
-    subtitle: "Product & Channel Solutions",
-    description:
-      "我们协助品牌与合作伙伴制定产品定位与渠道策略，推动产品在国际市场中的分销与落地。",
-    items: ["跨境渠道搭建", "产品市场定位", "分销策略规划", "市场进入支持"],
-  },
-  {
-    number: "02",
-    title: "高端资源与活动",
-    subtitle: "Premium Resources & Events",
-    description:
-      "我们提供纽约本地高端活动与商务资源对接，包括优质社交场景与商业机会。帮助客户拓展圈层、提升影响力，并获得更多合作可能。",
-    items: ["纽约高端商务活动", "优质社交场景", "商业资源对接", "圈层拓展支持"],
-  },
-  {
-    number: "03",
-    title: "商务合作与资源对接",
-    subtitle: "Business Cooperation",
-    description:
-      "我们为企业对接合适的合作伙伴、渠道与平台，促进跨境商业合作。专注于长期价值与可持续增长。",
-    items: ["合作伙伴对接", "渠道与平台整合", "跨境商业合作", "长期价值增长"],
-  },
-];
 
 export default function SolutionsSection() {
   const { ref, isVisible } = useScrollAnimation(0.05);
+  const { t } = useLanguage();
+
+  const services = [
+    {
+      number: "01",
+      title: t("solutions.s1_title"),
+      subtitle: t("solutions.s1_subtitle"),
+      description: t("solutions.s1_desc"),
+      items: [
+        t("solutions.s1_item1"),
+        t("solutions.s1_item2"),
+        t("solutions.s1_item3"),
+        t("solutions.s1_item4"),
+      ],
+    },
+    {
+      number: "02",
+      title: t("solutions.s2_title"),
+      subtitle: t("solutions.s2_subtitle"),
+      description: t("solutions.s2_desc"),
+      items: [
+        t("solutions.s2_item1"),
+        t("solutions.s2_item2"),
+        t("solutions.s2_item3"),
+        t("solutions.s2_item4"),
+      ],
+    },
+    {
+      number: "03",
+      title: t("solutions.s3_title"),
+      subtitle: t("solutions.s3_subtitle"),
+      description: t("solutions.s3_desc"),
+      items: [
+        t("solutions.s3_item1"),
+        t("solutions.s3_item2"),
+        t("solutions.s3_item3"),
+        t("solutions.s3_item4"),
+      ],
+    },
+  ];
 
   return (
     <section id="solutions" className="py-24 md:py-36" style={{ background: "#0F1620" }} ref={ref}>
@@ -51,21 +65,21 @@ export default function SolutionsSection() {
           <div className="flex items-center gap-3 mb-6">
             <span className="divider-line-bronze" />
             <span className="font-body text-xs tracking-[0.2em] uppercase text-bronze">
-              Solutions
+              {t("solutions.eyebrow")}
             </span>
           </div>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <h2
-              className="font-display font-light leading-tight"
+              className="font-display font-bold leading-tight"
               style={{ fontSize: "clamp(2.2rem, 5vw, 3.5rem)", color: "white", letterSpacing: "-0.02em" }}
             >
-              我们的业务
+              {t("solutions.title")}
             </h2>
             <p
               className="font-body max-w-md leading-relaxed"
               style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.95rem" }}
             >
-              三大核心业务板块，覆盖产品分销、资源整合与商务合作全链路
+              {t("solutions.subtitle")}
             </p>
           </div>
         </motion.div>
@@ -90,7 +104,7 @@ export default function SolutionsSection() {
               <div className="relative z-10">
                 {/* Number */}
                 <div
-                  className="font-display font-light mb-6"
+                  className="font-display font-bold mb-6"
                   style={{ fontSize: "4rem", color: "rgba(255,255,255,0.07)", lineHeight: 1 }}
                 >
                   {service.number}
@@ -98,7 +112,7 @@ export default function SolutionsSection() {
 
                 {/* Title */}
                 <h3
-                  className="font-display font-medium mb-1 leading-tight"
+                  className="font-display font-bold mb-1 leading-tight"
                   style={{ fontSize: "1.5rem", color: "white" }}
                 >
                   {service.title}
